@@ -24,9 +24,10 @@ sitemaps = {
 }
 
 urlpatterns = [
+    url(r'^accounts/', include('userena.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^web_api/', include('web_api.urls')),
     url(r'^login/', include('member.urls')),
-    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps},
-    name='django.contrib.sitemaps.views.sitemap'),
+
+    url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
 ]

@@ -27,6 +27,9 @@ STATIC_SERVE = DEBUG
 ALLOWED_HOSTS = []
 SITE_ID=1
 ANONYMOUS_USER_ID = -1
+USERENA_WITHOUT_USERNAMES = True
+USERENA_ACTIVATION_DAYS = 3650
+AUTH_PROFILE_MODULE = 'member.UserProfile'
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,13 +41,17 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.sitemaps',
     'django.contrib.staticfiles',
+    'userena',
     'guardian',
     'rest_framework',
     'member',
+    'easy_thumbnails',
+
 
 )
 
 MIDDLEWARE_CLASSES = (
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -53,10 +60,11 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'userena.middleware.UserenaLocaleMiddleware',
 )
 
 ROOT_URLCONF = 'wedding.urls'
-
+AUTH_USER_MODEL = 'auth.User'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -111,7 +119,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
-
+LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
+LOGIN_URL = '/accounts/signin/'
+LOGOUT_URL = '/accounts/signout/'
 STATIC_URL = '/static/'
 STATIC_ROOT = '/home/frank/project/static/'
 STATICFILES_DIRS = (
