@@ -5,10 +5,20 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
-<body>
 123
 {#<script src="{{ STATIC_URL }}member/js/login.js"></script>#}
 <script type="text/javascript" src='{% static 'lib/js/jquery-2.1.4.min.js' %}'></script>
 <script type="text/javascript" src='{% static 'member/js/login.js' %}'></script>
-</body>
+
+    <body>
+        <form action="{% url 'login_action' %}" method="post">
+            {% csrf_token %}
+            <label for="username">用戶名稱:</label>
+            <input type="text" name="username" value="" id="username"> <br />
+            <label for="password">用戶密碼:</label>
+            <input type="password" name="password" value="" id="password"> <br />
+            <input type="submit" value="登入" />
+        </form>
+    </body>
+
 </html>
